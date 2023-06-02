@@ -93,7 +93,7 @@ jobs:
       
       - name: downcase image name
         run: |
-          echo ${IMAGE_NAME,,} >> ${IMAGE_NAME_LOWER}
+          echo "${IMAGE_NAME,,}"" >> ${IMAGE_NAME_LOWER}
 
       # Kustomize Kubernetes resources.
       - name: Kustomize Kubernetes resources
