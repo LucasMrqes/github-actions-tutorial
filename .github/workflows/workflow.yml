@@ -28,6 +28,7 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: "^1.14" # The Go version to download and use.
+
       - name: Print Go version
         run: go version
 
@@ -93,7 +94,7 @@ jobs:
       # Kustomize Kubernetes resources.
       - name: Kustomize Kubernetes resources
         working-directory: ./manifests
-        run: kustomize edit set image REPOSITORY:TAG=${IMAGE_REPOSITORY}:sha-${GITHUB_SHA::7}
+        run: kustomize edit set image REPOSITORY:TAG=${REGISTRY}/${env.IMAGE_NAME}:sha-${GITHUB_SHA::7}
 
       # Deploy to Kubernetes.
       - name: Deploy to Kubernetes
