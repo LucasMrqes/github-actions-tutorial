@@ -3,6 +3,7 @@ name: main-worklfow
 env:
     REGISTRY: ghcr.io
     IMAGE_NAME: ${{ github.repository }}
+    COMPLETE_IMAGE_NAME: ghcr.io/${{ github.repository }}
     KUBECTL_VERSION: "1.14.10"
     KUSTOMIZE_VERSION: "3.5.4"
 
@@ -94,7 +95,7 @@ jobs:
       # Kustomize Kubernetes resources.
       - name: Kustomize Kubernetes resources
         working-directory: ./manifests
-        run: kustomize edit set image REPOSITORY:TAG=${REGISTRY}/${IMAGE_NAME}:sha-${GITHUB_SHA::7}
+        run: kustomize edit set image REPOSITORY:TAG=${COMPLETE_IMAGE_NAME}:sha-${GITHUB_SHA::7}
 
       # Deploy to Kubernetes.
       - name: Deploy to Kubernetes
